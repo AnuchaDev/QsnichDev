@@ -14,7 +14,7 @@ class _SplashState extends State<Splash> {
 
   @override
   Widget build(BuildContext context) {
-    Future.delayed(const Duration(seconds: 2), () {
+    Future.delayed(const Duration(seconds: 4), () {
       if (auth.currentUser == null) {
         Navigator.pushAndRemoveUntil(
             context,
@@ -29,9 +29,7 @@ class _SplashState extends State<Splash> {
     });
     return Scaffold(
       body: Center(
-        child: FlutterLogo(
-          size: 80,
-        ),
+        child: Image.asset('assets/images/logo.png'),
       ),
     );
   }

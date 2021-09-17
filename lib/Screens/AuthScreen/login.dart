@@ -16,73 +16,86 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Login"),
-      ),
+      resizeToAvoidBottomInset: false,
       body: isLoading == false
           ? Padding(
               padding: const EdgeInsets.all(8.0),
               child: Column(
                 children: [
+                  SizedBox(height: 20),
+                  Image(
+                    image: AssetImage('assets/images/logo.png'),
+                    fit: BoxFit.cover,
+                  ),
+                  SizedBox(height: 70),
                   TextFormField(
-                    decoration:
-                        InputDecoration(hintText: "เลขบัตรประจำตัวประชาชน"),
-                  ),
-                  const SizedBox(
-                    height: 30,
+                    decoration: InputDecoration(
+                      labelText: 'เลขบัตรประจำตัวประชาชน',
+                      icon: Icon(Icons.account_box),
+                    ),
+                    onSaved: null,
                   ),
                   TextFormField(
-                    decoration: InputDecoration(hintText: "รหัสผ่าน"),
+                    decoration: InputDecoration(
+                      labelText: 'รหัสผ่าน',
+                      icon: Icon(Icons.lock),
+                    ),
+                    obscureText: true,
+                    onSaved: null,
                   ),
-                  FlatButton(
+                  SizedBox(height: 20),
+                  Container(
+                    width: MediaQuery.of(context).size.width,
+                    child: RaisedButton(
                       color: Colors.blue,
                       onPressed: () {},
-                      child: Text("Log In ")),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => RegisterPage()));
-                    },
-                    child: Text("Don't have an account? Register "),
+                      child: Text('เข้าสู่ระบบ',
+                          style:
+                              TextStyle(color: Colors.white, fontSize: 16.0)),
+                    ),
                   ),
                   const SizedBox(
                     height: 10,
                   ),
-
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  //Social Auth Buttons
                   Column(
                     children: [
                       GestureDetector(
-                          onTap: () {
-                            //Sign In with google
-                            AuthClass()
-                                .signWithGoogle()
-                                .then((UserCredential value) {
-                              final displayName = value.user.displayName;
+                        onTap: () {
+                          //Sign In with google
+                          AuthClass()
+                              .signWithGoogle()
+                              .then((UserCredential value) {
+                            final displayName = value.user.displayName;
 
-                              print(displayName);
+                            print(displayName);
 
-                              Navigator.pushAndRemoveUntil(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => HomePage()),
-                                  (route) => false);
-                            });
-                          },
-                          child: Container(
-                              color: Colors.red,
-                              padding: const EdgeInsets.all(10),
-                              child: Text("Continue with Google"))),
-                      const SizedBox(
-                        height: 10,
+                            Navigator.pushAndRemoveUntil(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => HomePage()),
+                                (route) => false);
+                          });
+                        },
+                        child: FlatButton(
+                          onPressed: () {},
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Image.network(
+                                'https://cdn.discordapp.com/attachments/834620062090133543/836821196577964073/search.png',
+                                width: 30.0,
+                                height: 30.0,
+                              ),
+                              SizedBox(
+                                width: 5.0,
+                              ),
+                              Text(
+                                'เข้าสู่ระบบด้วย Google',
+                                style: TextStyle(fontSize: 16.0),
+                              ),
+                            ],
+                          ),
+                        ),
                       ),
                       GestureDetector(
                         onTap: () {
@@ -96,11 +109,67 @@ class _LoginPageState extends State<LoginPage> {
                                 (route) => false);
                           });
                         },
-                        child: Container(
-                          color: Colors.blue,
-                          padding: const EdgeInsets.all(10),
-                          child: Text("Continue with facebook"),
+                        child: FlatButton(
+                          onPressed: () {},
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Image.network(
+                                'https://images-ext-1.discordapp.net/external/1rty0dfKnzZbPrhz9MLCtZQq2k-sr8Vcrb-1-EzlLH4/https/upload.wikimedia.org/wikipedia/commons/0/05/Facebook_Logo_%25282019%2529.png?width=467&height=467',
+                                width: 30.0,
+                                height: 30.0,
+                              ),
+                              SizedBox(
+                                width: 5.0,
+                              ),
+                              Text(
+                                'เข้าสู่ระบบด้วย Facebook',
+                                style: TextStyle(fontSize: 16.0),
+                              ),
+                            ],
+                          ),
                         ),
+                      ),
+                      const SizedBox(
+                        height: 50,
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => RegisterPage()));
+                        },
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            SizedBox(
+                              width: 30,
+                            ),
+                            Text(
+                              'หากยังไม่มีบัญชีผู้ใช้',
+                              style: TextStyle(fontSize: 16),
+                            ),
+                            FlatButton(
+                              onPressed: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => RegisterPage()));
+                              },
+                              child: Text(
+                                "ลงทะเบียน",
+                                style: TextStyle(
+                                    color: Colors.blue,
+                                    decoration: TextDecoration.underline,
+                                    fontSize: 16),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 10,
                       ),
                     ],
                   )
