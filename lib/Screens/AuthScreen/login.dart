@@ -67,24 +67,22 @@ class _LoginPageState extends State<LoginPage> {
                   Column(
                     children: [
                       GestureDetector(
-                        onTap: () {
-                          //Sign In with google
-                          AuthClass()
-                              .signWithGoogle()
-                              .then((UserCredential value) {
-                            final displayName = value.user.displayName;
-
-                            print(displayName);
-
-                            Navigator.pushAndRemoveUntil(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => UidPage()),
-                                (route) => false);
-                          });
-                        },
                         child: FlatButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            AuthClass()
+                                .signWithGoogle()
+                                .then((UserCredential value) {
+                              final displayName = value.user.displayName;
+
+                              print(displayName);
+
+                              Navigator.pushAndRemoveUntil(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => UidPage()),
+                                  (route) => false);
+                            });
+                          },
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
@@ -105,19 +103,18 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                       ),
                       GestureDetector(
-                        onTap: () {
-                          AuthClass()
-                              .signInWithFacebook()
-                              .then((UserCredential value) {
-                            Navigator.pushAndRemoveUntil(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => UidPage()),
-                                (route) => false);
-                          });
-                        },
                         child: FlatButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            AuthClass()
+                                .signInWithFacebook()
+                                .then((UserCredential value) {
+                              Navigator.pushAndRemoveUntil(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => UidPage()),
+                                  (route) => false);
+                            });
+                          },
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
