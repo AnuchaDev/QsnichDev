@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:qsnichdev/Screens/home.dart';
+import 'package:qsnichdev/Screens/uid_user.dart';
 import 'package:qsnichdev/Screens/appointment.dart';
 import 'package:qsnichdev/Screens/history.dart';
 import 'package:qsnichdev/Screens/AuthScreen/login.dart';
@@ -25,7 +26,7 @@ class _Menu_PageState extends State<Menu_Page> {
       body:
           // nameclass == "login"? Login_Page():
           nameclass == "หน้าหลัก"
-            ? HomePage()
+            ? Home_Page()
             : nameclass == "ประวัติการรักษา"
                 ? History_Page()
                 : nameclass == "ข้อมูลของฉัน"

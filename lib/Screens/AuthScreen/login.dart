@@ -2,8 +2,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:qsnichdev/Provider/auth_provider.dart';
 import 'package:qsnichdev/Screens/AuthScreen/register.dart';
+import 'package:qsnichdev/Screens/menu.dart';
+import 'package:qsnichdev/Screens/myinfo.dart';
 
-import '../home.dart';
+import '../uid_user.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -48,7 +50,12 @@ class _LoginPageState extends State<LoginPage> {
                     width: MediaQuery.of(context).size.width,
                     child: RaisedButton(
                       color: Colors.blue,
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => Menu_Page()));
+                      },
                       child: Text('เข้าสู่ระบบ',
                           style:
                               TextStyle(color: Colors.white, fontSize: 16.0)),
@@ -72,7 +79,7 @@ class _LoginPageState extends State<LoginPage> {
                             Navigator.pushAndRemoveUntil(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => HomePage()),
+                                    builder: (context) => UidPage()),
                                 (route) => false);
                           });
                         },
@@ -105,7 +112,7 @@ class _LoginPageState extends State<LoginPage> {
                             Navigator.pushAndRemoveUntil(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => HomePage()),
+                                    builder: (context) => UidPage()),
                                 (route) => false);
                           });
                         },

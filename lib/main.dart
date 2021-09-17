@@ -1,5 +1,9 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:qsnichdev/Screens/AuthScreen/login.dart';
+import 'package:qsnichdev/Screens/AuthScreen/register.dart';
+import 'package:qsnichdev/Screens/bnavi.dart';
+import 'package:qsnichdev/Screens/menu.dart';
 import 'package:qsnichdev/Screens/splash.dart';
 
 void main() {
@@ -11,7 +15,14 @@ void main() {
 class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final _route = <String, WidgetBuilder>{
+      '/register': (BuildContext context) => RegisterPage(),
+      '/login': (BuildContext context) => LoginPage(),
+       '/menu': (BuildContext context) => Menu_Page(),
+    
+    };
     return MaterialApp(
+      routes: _route ,
       home: Home(),
       debugShowCheckedModeBanner: false,
     );

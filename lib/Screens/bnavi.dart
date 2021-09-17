@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:qsnichdev/Screens/home.dart';
+import 'package:qsnichdev/Screens/uid_user.dart';
 import 'package:qsnichdev/Screens/appointment.dart';
 import 'package:qsnichdev/Screens/history.dart';
 import 'package:qsnichdev/Screens/queue.dart';
@@ -16,7 +17,7 @@ class Bnavi extends StatefulWidget {
 class _BnaviState extends State<Bnavi> {
     int _selectedIndex = 0;
     List<Widget> _pageWidget = <Widget>[
-        HomePage(),
+        Home_Page(),
         History_Page(),
         Appointment_Page(),
         Queue_Page(),

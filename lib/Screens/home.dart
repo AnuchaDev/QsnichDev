@@ -1,37 +1,25 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:qsnichdev/Provider/auth_provider.dart';
-import 'package:qsnichdev/Screens/AuthScreen/login.dart';
+import 'package:webview_flutter/webview_flutter.dart';
 
-class HomePage extends StatefulWidget {
+class Home_Page extends StatefulWidget {
+  static const routeName = '/home';
+
   @override
-  _HomePageState createState() => _HomePageState();
+  State<StatefulWidget> createState() {
+        return _Home_PageState();
+    }
 }
 
-class _HomePageState extends State<HomePage> {
-  String user = FirebaseAuth.instance.currentUser.email == null
-      ? FirebaseAuth.instance.currentUser.phoneNumber
-      : FirebaseAuth.instance.currentUser.email;
+class _Home_PageState extends State<Home_Page> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Welcome"),
-        actions: [
-          IconButton(
-              icon: Icon(Icons.exit_to_app),
-              onPressed: () {
-                //sign Out User
-                AuthClass().signOut();
-                Navigator.pushAndRemoveUntil(
-                    context,
-                    MaterialPageRoute(builder: (context) => LoginPage()),
-                    (route) => false);
-              })
-        ],
-      ),
-      body: Center(
-        child: Text("Email $user"),
+     return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: Scaffold(
+        body: WebView(
+          initialUrl: "https://flutter.dev/",
+          javascriptMode: JavascriptMode.unrestricted,
+        ),
       ),
     );
   }
