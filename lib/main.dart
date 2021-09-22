@@ -18,11 +18,10 @@ class App extends StatelessWidget {
     final _route = <String, WidgetBuilder>{
       '/register': (BuildContext context) => RegisterPage(),
       '/login': (BuildContext context) => LoginPage(),
-       '/menu': (BuildContext context) => Menu_Page(),
-    
+      '/menu': (BuildContext context) => Menu_Page(),
     };
     return MaterialApp(
-      routes: _route ,
+      routes: _route,
       home: Home(),
       debugShowCheckedModeBanner: false,
     );

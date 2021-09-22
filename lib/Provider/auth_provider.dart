@@ -75,6 +75,7 @@ class AuthClass {
 
     final FacebookAuthCredential facebookAuthCredential =
         FacebookAuthProvider.credential(result.token);
+    print("FacebookAuthCredential kkkkkkkkk $facebookAuthCredential");
 
     return await FirebaseAuth.instance
         .signInWithCredential(facebookAuthCredential);

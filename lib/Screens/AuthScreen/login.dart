@@ -5,8 +5,6 @@ import 'package:qsnichdev/Screens/AuthScreen/register.dart';
 import 'package:qsnichdev/Screens/menu.dart';
 import 'package:qsnichdev/Screens/myinfo.dart';
 
-import '../uid_user.dart';
-
 class LoginPage extends StatefulWidget {
   @override
   _LoginPageState createState() => _LoginPageState();
@@ -72,14 +70,12 @@ class _LoginPageState extends State<LoginPage> {
                             AuthClass()
                                 .signWithGoogle()
                                 .then((UserCredential value) {
-                              final displayName = value.user.displayName;
-
-                              print(displayName);
+                              print(value);
 
                               Navigator.pushAndRemoveUntil(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => UidPage()),
+                                      builder: (context) => RegisterPage()),
                                   (route) => false);
                             });
                           },
@@ -108,10 +104,11 @@ class _LoginPageState extends State<LoginPage> {
                             AuthClass()
                                 .signInWithFacebook()
                                 .then((UserCredential value) {
+                              print(value);
                               Navigator.pushAndRemoveUntil(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => UidPage()),
+                                      builder: (context) => RegisterPage()),
                                   (route) => false);
                             });
                           },

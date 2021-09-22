@@ -2,7 +2,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:qsnichdev/Screens/AuthScreen/login.dart';
-import 'package:qsnichdev/Screens/uid_user.dart';
 
 class Splash extends StatefulWidget {
   @override
@@ -23,7 +22,7 @@ class _SplashState extends State<Splash> {
       } else {
         Navigator.pushAndRemoveUntil(
             context,
-            MaterialPageRoute(builder: (context) => UidPage()),
+            MaterialPageRoute(builder: (context) => LoginPage()),
             (route) => false);
       }
     });

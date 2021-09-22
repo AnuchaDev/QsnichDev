@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:qsnichdev/Screens/home.dart';
-import 'package:qsnichdev/Screens/uid_user.dart';
 import 'package:qsnichdev/Screens/appointment.dart';
 import 'package:qsnichdev/Screens/history.dart';
 import 'package:qsnichdev/Screens/AuthScreen/login.dart';
@@ -26,16 +25,16 @@ class _Menu_PageState extends State<Menu_Page> {
       body:
           // nameclass == "login"? Login_Page():
           nameclass == "หน้าหลัก"
-            ? Home_Page()
-            : nameclass == "ประวัติการรักษา"
-                ? History_Page()
-                : nameclass == "ข้อมูลของฉัน"
-                    ? Myinfo_Page()
-                    : nameclass == "นัดหมาย"
-                        ? Appointment_Page()
-                        : nameclass == 'คิวของฉัน'
-                            ? Queue_Page()
-                            : LoginPage(),
+              ? Home_Page()
+              : nameclass == "ประวัติการรักษา"
+                  ? History_Page()
+                  : nameclass == "ข้อมูลของฉัน"
+                      ? Myinfo_Page()
+                      : nameclass == "นัดหมาย"
+                          ? Appointment_Page()
+                          : nameclass == 'คิวของฉัน'
+                              ? Queue_Page()
+                              : LoginPage(),
       drawer: Container(
         width: width * 0.70,
         child: new Drawer(
@@ -145,12 +144,11 @@ class _Menu_PageState extends State<Menu_Page> {
                   Navigator.of(context).pop();
                 },
                 leading: Image.network(
-                  'https://media.discordapp.net/attachments/834620062090133543/836834745303826472/3601157.png',
-                  width: 30,
-                  height: 30,
-                   color: Color.fromRGBO(255, 255, 255, 1),
-                    colorBlendMode: BlendMode.modulate
-                ),
+                    'https://media.discordapp.net/attachments/834620062090133543/836834745303826472/3601157.png',
+                    width: 30,
+                    height: 30,
+                    color: Color.fromRGBO(255, 255, 255, 1),
+                    colorBlendMode: BlendMode.modulate),
                 title: Text(
                   "ประวัติการรักษา",
                   style: TextStyle(fontSize: 18),
@@ -221,4 +219,3 @@ class _Menu_PageState extends State<Menu_Page> {
     );
   }
 }
-
