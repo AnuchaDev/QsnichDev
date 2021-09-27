@@ -9,6 +9,9 @@ import 'package:qsnichdev/Screens/AuthScreen/login.dart';
 import 'package:qsnichdev/Screens/menu.dart';
 
 class RegisterPage extends StatefulWidget {
+  RegisterPage({this.Urlimage});
+  final Urlimage;
+
   @override
   _RegisterPageState createState() => _RegisterPageState();
 }
@@ -27,11 +30,13 @@ class _RegisterPageState extends State<RegisterPage> {
 
   @override
   void initState() {
+    print(".................${widget.Urlimage}");
     super.initState();
     downloadImage();
   }
 
   Future getImage() async {
+    print("Imageee...${_image.path}");
     final pickedFile =
         await picker.getImage(source: Image_pick.ImageSource.gallery);
     setState(() {
@@ -560,10 +565,9 @@ class _RegisterPageState extends State<RegisterPage> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 new Center(
-                                  child: _image == null
+                                  child: _image.path == ''
                                       ? CircleAvatar(
-                                          backgroundImage: NetworkImage(
-                                              'https://img.pngio.com/no-avatar-png-transparent-png-download-for-free-3856300-trzcacak-png-avatar-920_954.png'),
+                                          backgroundImage: NetworkImage('${widget.Urlimage}'),
                                           radius: 65.0)
                                       : new CircleAvatar(
                                           backgroundImage:
@@ -573,20 +577,20 @@ class _RegisterPageState extends State<RegisterPage> {
                                 ),
                               ],
                             ),
-                            Padding(
-                                padding: EdgeInsets.only(top: 90.0, left: 90.0),
-                                child: new Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    new FloatingActionButton(
-                                      foregroundColor: Colors.grey,
-                                      backgroundColor: Colors.white,
-                                      onPressed: getImage,
-                                      tooltip: 'Pick Image',
-                                      child: Icon(Icons.add_a_photo),
-                                    ),
-                                  ],
-                                )),
+                            // Padding(
+                            //     padding: EdgeInsets.only(top: 90.0, left: 90.0),
+                            //     child: new Row(
+                            //       mainAxisAlignment: MainAxisAlignment.center,
+                            //       children: [
+                            //         new FloatingActionButton(
+                            //           foregroundColor: Colors.grey,
+                            //           backgroundColor: Colors.white,
+                            //           onPressed: getImage,
+                            //           tooltip: 'Pick Image',
+                            //           child: Icon(Icons.add_a_photo),
+                            //         ),
+                            //       ],
+                            //     )),
                           ]),
                         )
                       ],

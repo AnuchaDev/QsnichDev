@@ -4,6 +4,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 
 class AuthClass {
   FirebaseAuth auth = FirebaseAuth.instance;
+  
 
   //Create Account
 
@@ -38,8 +39,9 @@ Future<UserCredential> signInWithGoogle() async {
 
 
   Future<UserCredential> signInWithFacebook() async {
+    
     final LoginResult result = await FacebookAuth.instance.login();
-    print("result....${result.accessToken!.token}");
+    print("result....${result.accessToken!.userId}");
 
     final OAuthCredential facebookAuthCredential =
         FacebookAuthProvider.credential(result.accessToken!.token);

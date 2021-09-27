@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:qsnichdev/Provider/auth_provider.dart';
@@ -104,11 +106,13 @@ class _LoginPageState extends State<LoginPage> {
                             AuthClass()
                                 .signInWithFacebook()
                                 .then((UserCredential value) {
-                              print(value);
+                              var t1 =  value.additionalUserInfo!.profile!.values.first['data']['url'];
+                            
+                              print("Valueeee......$t1");
                               Navigator.pushAndRemoveUntil(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => RegisterPage()),
+                                      builder: (context) => RegisterPage(Urlimage: t1)),
                                   (route) => false);
                             });
                           },
