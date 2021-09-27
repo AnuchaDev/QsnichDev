@@ -197,7 +197,7 @@ class _Menu_PageState extends State<Menu_Page> {
               ),
               ListTile(
                 onTap: () {
-                  auth.currentUser!.delete();
+                  auth.signOut();
                   Navigator.pushNamedAndRemoveUntil(
                       context, "/login", (route) => false);
                 },
