@@ -5,6 +5,7 @@ import 'package:qsnichdev/Screens/AuthScreen/register.dart';
 import 'package:qsnichdev/Screens/bnavi.dart';
 import 'package:qsnichdev/Screens/menu.dart';
 import 'package:qsnichdev/Screens/splash.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();

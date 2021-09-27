@@ -5,6 +5,7 @@ import 'package:qsnichdev/Screens/history.dart';
 import 'package:qsnichdev/Screens/AuthScreen/login.dart';
 import 'package:qsnichdev/Screens/myinfo.dart';
 import 'package:qsnichdev/Screens/queue.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class Menu_Page extends StatefulWidget {
   @override
@@ -13,6 +14,7 @@ class Menu_Page extends StatefulWidget {
 
 class _Menu_PageState extends State<Menu_Page> {
   String nameclass = 'หน้าหลัก';
+   FirebaseAuth auth = FirebaseAuth.instance;
 
   @override
   Widget build(BuildContext context) {
@@ -195,6 +197,7 @@ class _Menu_PageState extends State<Menu_Page> {
               ),
               ListTile(
                 onTap: () {
+                  auth.currentUser!.delete();
                   Navigator.pushNamedAndRemoveUntil(
                       context, "/login", (route) => false);
                 },
