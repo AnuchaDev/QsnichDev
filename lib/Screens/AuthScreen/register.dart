@@ -1,7 +1,8 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
-import 'dart:io';
 import 'package:image_picker/image_picker.dart' as Image_pick;
 import 'package:qsnichdev/Provider/auth_provider.dart';
 import 'package:qsnichdev/Screens/AuthScreen/login.dart';
@@ -15,8 +16,8 @@ class RegisterPage extends StatefulWidget {
 class _RegisterPageState extends State<RegisterPage> {
   bool isLoading = false;
   final FocusNode myFocusNode = FocusNode();
-  late File _image;
-  late String profilePath;
+  File _image = File("");
+  String profilePath = '';
   final picker = Image_pick.ImagePicker();
   bool _passwordVisible = true;
   bool _confirmpasswordVisible = true;
