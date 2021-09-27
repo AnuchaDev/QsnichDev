@@ -7,6 +7,7 @@ import 'package:image_picker/image_picker.dart' as Image_pick;
 import 'package:qsnichdev/Provider/auth_provider.dart';
 import 'package:qsnichdev/Screens/AuthScreen/login.dart';
 import 'package:qsnichdev/Screens/menu.dart';
+import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 
 class RegisterPage extends StatefulWidget {
   RegisterPage({this.Urlimage});
@@ -33,6 +34,16 @@ class _RegisterPageState extends State<RegisterPage> {
     print(".................${widget.Urlimage}");
     super.initState();
     downloadImage();
+  }
+
+  Future getTime() async {
+    DatePicker.showDatePicker(context,
+        showTitleActions: true,
+        maxTime: DateTime.now(), onChanged: (date) {
+      print('change $date');
+    }, onConfirm: (date) {
+      print('confirm $date');
+    }, currentTime: DateTime.now(), locale: LocaleType.th);
   }
 
   Future getImage() async {
@@ -567,7 +578,8 @@ class _RegisterPageState extends State<RegisterPage> {
                                 new Center(
                                   child: _image.path == ''
                                       ? CircleAvatar(
-                                          backgroundImage: NetworkImage('${widget.Urlimage}'),
+                                          backgroundImage: NetworkImage(
+                                              '${widget.Urlimage}'),
                                           radius: 65.0)
                                       : new CircleAvatar(
                                           backgroundImage:
@@ -577,20 +589,20 @@ class _RegisterPageState extends State<RegisterPage> {
                                 ),
                               ],
                             ),
-                            // Padding(
-                            //     padding: EdgeInsets.only(top: 90.0, left: 90.0),
-                            //     child: new Row(
-                            //       mainAxisAlignment: MainAxisAlignment.center,
-                            //       children: [
-                            //         new FloatingActionButton(
-                            //           foregroundColor: Colors.grey,
-                            //           backgroundColor: Colors.white,
-                            //           onPressed: getImage,
-                            //           tooltip: 'Pick Image',
-                            //           child: Icon(Icons.add_a_photo),
-                            //         ),
-                            //       ],
-                            //     )),
+                            Padding(
+                                padding: EdgeInsets.only(top: 90.0, left: 90.0),
+                                child: new Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    new FloatingActionButton(
+                                      foregroundColor: Colors.grey,
+                                      backgroundColor: Colors.white,
+                                      onPressed: getTime,
+                                      tooltip: 'Pick Image',
+                                      child: Icon(Icons.add_a_photo),
+                                    ),
+                                  ],
+                                )),
                           ]),
                         )
                       ],

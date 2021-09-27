@@ -41,7 +41,7 @@ Future<UserCredential> signInWithGoogle() async {
   Future<UserCredential> signInWithFacebook() async {
     
     final LoginResult result = await FacebookAuth.instance.login();
-    print("result....${result.accessToken!.userId}");
+    print("result....${result.accessToken!.token}");
 
     final OAuthCredential facebookAuthCredential =
         FacebookAuthProvider.credential(result.accessToken!.token);

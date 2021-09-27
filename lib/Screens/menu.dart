@@ -77,7 +77,7 @@ class _Menu_PageState extends State<Menu_Page> {
                     Padding(
                       padding: const EdgeInsets.only(left: 10),
                       child: Text(
-                        "anucha.su.61@ubu.ac.th",
+                        "เพศ : ชาย    อายุ: 22",
                         style: TextStyle(fontSize: 16, color: Colors.white),
                       ),
                     ),

@@ -16,7 +16,7 @@ class _SplashState extends State<Splash> {
   @override
   Widget build(BuildContext context) {
     Future.delayed(const Duration(seconds: 4), () {
-      print("aunthuser....${auth.currentUser}");
+      print("aunthuser....${auth.currentUser} .........}");
       if (auth.currentUser == null) {
         Navigator.pushAndRemoveUntil(
             context,
