@@ -68,7 +68,7 @@ class _LoginPageState extends State<LoginPage> {
                         child: FlatButton(
                           onPressed: () {
                             AuthClass()
-                                .signWithGoogle()
+                                .signInWithGoogle()
                                 .then((UserCredential value) {
                               print(value);
 
