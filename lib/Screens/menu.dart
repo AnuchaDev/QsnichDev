@@ -10,6 +10,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:age/age.dart';
 
 class Menu_Page extends StatefulWidget {
+    Menu_Page({this.uid});
+  final uid;
+
   @override
   _Menu_PageState createState() => _Menu_PageState();
 }
@@ -23,8 +26,30 @@ class _Menu_PageState extends State<Menu_Page> {
   late AgeDuration age;
 
   Future<bool> getData() async {
-    if (datauser == null) {
+    print("uiddd${widget.uid}");
+    if (datauser == null && auth.currentUser == null) {
       await firestore
+          .collection("users")
+          .doc(widget.uid)
+          .get()
+          .then((value) {
+        setState(() {
+          datauser = value.data();
+          print(
+              'iiiiiiiiiiiiiiiiiiiiiiiiiiiiiii${value.data()!['birthday'].toString().split("/")}');
+          DateTime birthday = DateTime(
+              int.parse(value.data()!['birthday'].toString().split("/")[2]),
+              int.parse(value.data()!['birthday'].toString().split("/")[1]),
+              int.parse(value.data()!['birthday'].toString().split("/")[0]));
+          // DateTime birthday = DateTime(1990, 1, 20);
+          age = Age.dateDifference(
+              fromDate: birthday, toDate: today, includeToDate: false);
+
+          print('Your age is................. ${age.years}    $birthday');
+        });
+      });
+    }else if(datauser == null && auth.currentUser != null){
+       await firestore
           .collection("users")
           .doc(auth.currentUser!.uid)
           .get()

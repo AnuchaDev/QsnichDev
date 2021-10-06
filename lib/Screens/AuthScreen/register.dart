@@ -703,19 +703,19 @@ class _RegisterPageState extends State<RegisterPage> {
     final height = MediaQuery.of(context).size.height;
     return new Scaffold(
         appBar: AppBar(
-          title: Text("Welcome"),
-          actions: [
-            IconButton(
-                icon: Icon(Icons.exit_to_app),
-                onPressed: () {
-                  //sign Out User
-                  AuthClass().signOut();
-                  Navigator.pushAndRemoveUntil(
-                      context,
-                      MaterialPageRoute(builder: (context) => LoginPage()),
-                      (route) => false);
-                })
-          ],
+          title: Text(""),
+          // actions: [
+          //   IconButton(
+          //       icon: Icon(Icons.exit_to_app),
+          //       onPressed: () {
+          //         //sign Out User
+          //         AuthClass().signOut();
+          //         Navigator.pushAndRemoveUntil(
+          //             context,
+          //             MaterialPageRoute(builder: (context) => LoginPage()),
+          //             (route) => false);
+          //       })
+          // ],
         ),
         body: ListView(
           children: [

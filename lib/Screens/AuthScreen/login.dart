@@ -14,7 +14,10 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  FirebaseFirestore firestore = FirebaseFirestore.instance;
   bool isLoading = false;
+  final _cid = TextEditingController();
+  final _password = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -32,6 +35,7 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                   SizedBox(height: 70),
                   TextFormField(
+                    controller: _cid,
                     decoration: InputDecoration(
                       labelText: 'เลขบัตรประจำตัวประชาชน',
                       icon: Icon(Icons.account_box),
@@ -39,6 +43,7 @@ class _LoginPageState extends State<LoginPage> {
                     onSaved: null,
                   ),
                   TextFormField(
+                    controller: _password,
                     decoration: InputDecoration(
                       labelText: 'รหัสผ่าน',
                       icon: Icon(Icons.lock),
@@ -52,10 +57,37 @@ class _LoginPageState extends State<LoginPage> {
                     child: RaisedButton(
                       color: Colors.blue,
                       onPressed: () {
-                        Navigator.push(
+                        print("cid.........${_cid.text}");
+                        print("pass.....${_password.text}");
+
+                        try {
+                          firestore
+                              .collection('users')
+                              .where("cid", isEqualTo: _cid.text)
+                              .where("password", isEqualTo: _password.text)
+                              .get()
+                              .then((value) {
+                            print(value.docs);
+                            if(value.docs.isNotEmpty){
+                              print('gogogogogogogogogog');
+                              print(value.docs[0].id);
+                                  Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => Menu_Page()));
+                                builder: (context) => Menu_Page(uid: value.docs[0].id )));
+                            }else{
+                              print("erororororor");
+                            }
+                          });
+                        } catch (err) {
+                          print("error....$err");
+                        }
+                        ;
+
+                        // Navigator.push(
+                        //     context,
+                        //     MaterialPageRoute(
+                        //         builder: (context) => Menu_Page()));
                       },
                       child: Text('เข้าสู่ระบบ',
                           style:
