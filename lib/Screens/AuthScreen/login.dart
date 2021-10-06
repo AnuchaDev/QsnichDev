@@ -19,6 +19,29 @@ class _LoginPageState extends State<LoginPage> {
   final _cid = TextEditingController();
   final _password = TextEditingController();
 
+    void _showDialog() {
+    // flutter defined function
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        // return object of type Dialog
+        return AlertDialog(
+          // title: new Text("Alert Dialog title"),
+          content: new Text("รหัสผ่านหรือเลขประจำตัวไม่ถูกต้อง"),
+          actions: <Widget>[
+            // usually buttons at the bottom of the dialog
+            new FlatButton(
+              child: new Text("ปิด"),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -76,6 +99,7 @@ class _LoginPageState extends State<LoginPage> {
                             MaterialPageRoute(
                                 builder: (context) => Menu_Page(uid: value.docs[0].id )));
                             }else{
+                              _showDialog();
                               print("erororororor");
                             }
                           });

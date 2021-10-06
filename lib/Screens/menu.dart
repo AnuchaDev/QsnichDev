@@ -24,9 +24,14 @@ class _Menu_PageState extends State<Menu_Page> {
   var datauser;
   DateTime today = DateTime.now();
   late AgeDuration age;
+  var uiduser;
 
   Future<bool> getData() async {
     print("uiddd${widget.uid}");
+
+    setState(() {
+      uiduser = widget.uid;
+    });
     if (datauser == null && auth.currentUser == null) {
       await firestore
           .collection("users")
@@ -89,15 +94,15 @@ class _Menu_PageState extends State<Menu_Page> {
             body:
                 // nameclass == "login"? Login_Page():
                 nameclass == "หน้าหลัก"
-                    ? Home_Page()
+                    ? Home_Page(uid : uiduser)
                     : nameclass == "ประวัติการรักษา"
-                        ? History_Page()
+                        ? History_Page(uid : uiduser)
                         : nameclass == "ข้อมูลของฉัน"
-                            ? Myinfo_Page()
+                            ? Myinfo_Page(uid : uiduser)
                             : nameclass == "นัดหมาย"
-                                ? Appointment_Page()
+                                ? Appointment_Page(uid : uiduser)
                                 : nameclass == 'คิวของฉัน'
-                                    ? Queue_Page()
+                                    ? Queue_Page(uid : uiduser)
                                     : LoginPage(),
             drawer: Container(
               width: width * 0.70,
