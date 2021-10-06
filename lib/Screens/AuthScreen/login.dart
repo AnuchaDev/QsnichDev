@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:qsnichdev/Provider/auth_provider.dart';
@@ -106,14 +107,36 @@ class _LoginPageState extends State<LoginPage> {
                             AuthClass()
                                 .signInWithFacebook()
                                 .then((UserCredential value) {
-                              var t1 =  value.additionalUserInfo!.profile!.values.first['data']['url'];
-                            
-                              print("Valueeee......$t1");
-                              Navigator.pushAndRemoveUntil(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => RegisterPage(Urlimage: t1)),
-                                  (route) => false);
+                              var t1 = value.additionalUserInfo!.profile!.values
+                                  .first['data']['url'];
+                              FirebaseFirestore.instance
+                                  .collection("users")
+                                  .doc(value.user!.uid)
+                                  .get()
+                                  .then((value) {
+                                print("userddddddd${value.data()}");
+                                if (value.data() == null) {
+                                  Navigator.pushAndRemoveUntil(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              RegisterPage(Urlimage: t1)),
+                                      (route) => false);
+                                } else {
+                                  Navigator.pushAndRemoveUntil(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => Menu_Page()),
+                                      (route) => false);
+                                }
+                              });
+                              print("Valueeee......${value.user!.uid}");
+                              // Navigator.pushAndRemoveUntil(
+                              //     context,
+                              //     MaterialPageRoute(
+                              //         builder: (context) =>
+                              //             RegisterPage(Urlimage: t1)),
+                              //     (route) => false);
                             });
                           },
                           child: Row(
