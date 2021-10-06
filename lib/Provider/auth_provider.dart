@@ -6,47 +6,10 @@ class AuthClass {
   FirebaseAuth auth = FirebaseAuth.instance;
 
   //Create Account
-  Future<String> createAccount({String email, String password}) async {
-    try {
-      await auth.createUserWithEmailAndPassword(
-          email: email, password: password);
-      return "Account created";
-    } on FirebaseAuthException catch (e) {
-      if (e.code == 'weak-password') {
-        return 'The password provided is too weak.';
-      } else if (e.code == 'email-already-in-use') {
-        return 'The account already exists for that email.';
-      }
-    } catch (e) {
-      return "Error occurred";
-    }
-  }
 
   //Sign in user
-  Future<String> signIN({String email, String password}) async {
-    try {
-      await auth.signInWithEmailAndPassword(email: email, password: password);
-      return "Welcome";
-    } on FirebaseAuthException catch (e) {
-      if (e.code == 'user-not-found') {
-        return 'No user found for that email.';
-      } else if (e.code == 'wrong-password') {
-        return 'Wrong password provided for that user.';
-      }
-    }
-  }
 
   //Reset Password
-  Future<String> resetPassword({String email}) async {
-    try {
-      await auth.sendPasswordResetEmail(
-        email: email,
-      );
-      return "Email sent";
-    } catch (e) {
-      return "Error occurred";
-    }
-  }
 
   //SignOut
   void signOut() {
@@ -54,30 +17,43 @@ class AuthClass {
   }
 
   //Google Auth
-  Future<UserCredential> signWithGoogle() async {
-    final GoogleSignInAccount googleUser =
-        await GoogleSignIn(scopes: <String>["email"]).signIn();
+  Future<UserCredential> signInWithGoogle() async {
+    // Trigger the authentication flow
+    final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
 
+    // Obtain the auth details from the request
     final GoogleSignInAuthentication googleAuth =
-        await googleUser.authentication;
+        await googleUser!.authentication;
 
-    final GoogleAuthCredential credential = GoogleAuthProvider.credential(
+    // Create a new credential
+    final credential = GoogleAuthProvider.credential(
       accessToken: googleAuth.accessToken,
       idToken: googleAuth.idToken,
     );
 
+    // Once signed in, return the UserCredential
     return await FirebaseAuth.instance.signInWithCredential(credential);
   }
-
 //Facebook
-  Future<UserCredential> signInWithFacebook() async {
-    final AccessToken result = await FacebookAuth.instance.login();
 
-    final FacebookAuthCredential facebookAuthCredential =
-        FacebookAuthProvider.credential(result.token);
-    print("FacebookAuthCredential kkkkkkkkk $facebookAuthCredential");
+  Future<UserCredential> signInWithFacebook() async {
+    final LoginResult result = await FacebookAuth.instance.login();
+    print("result....${result.accessToken!.token}");
+
+    final OAuthCredential facebookAuthCredential =
+        FacebookAuthProvider.credential(result.accessToken!.token);
 
     return await FirebaseAuth.instance
         .signInWithCredential(facebookAuthCredential);
   }
+// Future<UserCredential> signInWithFacebook() async {
+//   // Trigger the sign-in flow
+//   final LoginResult loginResult = await FacebookAuth.instance.login();
+
+//   // Create a credential from the access token
+//   final OAuthCredential facebookAuthCredential = FacebookAuthProvider.credential(loginResult.accessToken!.token);
+
+//   // Once signed in, return the UserCredential
+//   return FirebaseAuth.instance.signInWithCredential(facebookAuthCredential);
+// }
 }
