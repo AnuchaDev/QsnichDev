@@ -10,7 +10,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:age/age.dart';
 
 class Menu_Page extends StatefulWidget {
-    Menu_Page({this.uid});
+  Menu_Page({this.uid});
   final uid;
 
   @override
@@ -33,11 +33,7 @@ class _Menu_PageState extends State<Menu_Page> {
       uiduser = widget.uid;
     });
     if (datauser == null && auth.currentUser == null) {
-      await firestore
-          .collection("users")
-          .doc(widget.uid)
-          .get()
-          .then((value) {
+      await firestore.collection("users").doc(widget.uid).get().then((value) {
         setState(() {
           datauser = value.data();
           print(
@@ -53,8 +49,8 @@ class _Menu_PageState extends State<Menu_Page> {
           print('Your age is................. ${age.years}    $birthday');
         });
       });
-    }else if(datauser == null && auth.currentUser != null){
-       await firestore
+    } else if (datauser == null && auth.currentUser != null) {
+      await firestore
           .collection("users")
           .doc(auth.currentUser!.uid)
           .get()
@@ -94,15 +90,15 @@ class _Menu_PageState extends State<Menu_Page> {
             body:
                 // nameclass == "login"? Login_Page():
                 nameclass == "หน้าหลัก"
-                    ? Home_Page(uid : uiduser)
+                    ? Home_Page(uid: uiduser)
                     : nameclass == "ประวัติการรักษา"
-                        ? History_Page(uid : uiduser)
+                        ? History_Page(uid: uiduser)
                         : nameclass == "ข้อมูลของฉัน"
-                            ? Myinfo_Page(uid : uiduser)
+                            ? Myinfo_Page(uid: uiduser)
                             : nameclass == "นัดหมาย"
-                                ? Appointment_Page(uid : uiduser)
+                                ? Appointment_Page(uid: uiduser)
                                 : nameclass == 'คิวของฉัน'
-                                    ? Queue_Page(uid : uiduser)
+                                    ? Queue_Page(uid: uiduser)
                                     : LoginPage(),
             drawer: Container(
               width: width * 0.70,
